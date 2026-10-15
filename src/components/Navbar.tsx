@@ -23,14 +23,14 @@ const KNOWLEDGE_ITEMS: DropItem[] = [
 
 const TOOL_ITEMS: DropItem[] = [
   { page: "pathfinder", label: "مسیر‌یاب هوشمند", desc: "نقشه راه مهاجرت و کار در ۴ سؤال", icon: Route },
-  { page: "ailab", label: "آزمایشگاه هوش مصنوعی", desc: "غربالگری و پیش‌بینی مسیر کودک", icon: Bot },
+  { page: "ailab", label: "دستیار هوش مصنوعی", desc: "گفتگوی آموزشی در سایت و تلگرام", icon: Bot },
   { page: "familymap", label: "نقشه خانواده‌ها و مراکز", desc: "مراکز و خانواده‌های هم‌تجربه روی نقشه", icon: MapPin },
 ];
 
 const MOBILE_LINKS: { page: string; label: string }[] = [
   { page: "hub", label: "مرکز دانش اوتیسم" },
   { page: "news", label: "تازه‌های پژوهش و اخبار" },
-  { page: "ailab", label: "آزمایشگاه هوش مصنوعی" },
+  { page: "ailab", label: "دستیار هوش مصنوعی" },
   { page: "familymap", label: "نقشه خانواده‌ها و مراکز" },
   { page: "pathfinder", label: "مسیر‌یاب هوشمند" },
   { page: "room", label: "اتاق کلاب‌هاوس" },

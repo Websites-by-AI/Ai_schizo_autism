@@ -92,7 +92,7 @@ export default function NewsRoom({ go }: { go: GoFn }) {
               <h3 className="text-[15px] font-black text-amber-300">با این مقاله چه کار کنیم؟</h3>
               {[
                 { t: "در اتاق پنجشنبه درباره‌اش حرف می‌زنیم", a: "ورود به صفحه اتاق", fn: () => go("room") },
-                { t: "ابزار غربالگری هوشمند را امتحان کنید", a: "آزمایشگاه هوش مصنوعی", fn: () => go("ailab") },
+                { t: "پرسش‌های آموزشی خود را از دستیار بپرسید", a: "دستیار هوش مصنوعی", fn: () => go("ailab") },
                 { t: "مقاله را برای بعد ذخیره کنید", a: saved.has(1) ? "ذخیره شد" : "ذخیره مقاله", fn: () => toggleSave(1) },
               ].map((x) => (
                 <button key={x.t} onClick={x.fn} className="group rounded-2xl bg-white/[0.06] px-5 py-4 text-start ring-1 ring-white/12 transition-colors hover:bg-white/[0.12]">
