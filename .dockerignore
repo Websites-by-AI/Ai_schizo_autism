@@ -1,0 +1,15 @@
+.git
+node_modules
+dist
+.env
+.env.*
+!.env.example
+*.log
+tests
+playwright-report
+test-results
+screenshots
+
+.wrangler/
+.dev.vars
+.dev.vars.*

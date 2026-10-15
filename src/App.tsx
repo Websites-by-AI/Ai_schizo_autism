@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Bot } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -19,14 +19,31 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import type { CountryId } from "./data/site";
 
+const PAGES = new Set(["home", "country", "hub", "ailab", "news", "familymap", "pathfinder", "community", "room", "season", "collaborate", "services", "about", "contact"]);
+const COUNTRIES = new Set(["germany", "turkey", "iran"]);
+
+function readRoute(): { page: string; countryId: CountryId } {
+  const route = window.location.hash.slice(1) || window.location.pathname.slice(1);
+  const [candidate, country] = route.replace(/^\//, "").split("/");
+  return { page: PAGES.has(candidate) ? candidate : "home", countryId: (COUNTRIES.has(country) ? country : "germany") as CountryId };
+}
+
 export default function App() {
-  const [page, setPage] = useState<string>("home");
-  const [countryId, setCountryId] = useState<CountryId>("germany");
+  const [{ page, countryId }, setRoute] = useState(readRoute);
   const [showTop, setShowTop] = useState(false);
 
   const go = useCallback((next: string, cId?: string) => {
-    if (cId) setCountryId(cId as CountryId);
-    setPage(next);
+    const safePage = PAGES.has(next) ? next : "home";
+    const country = cId && COUNTRIES.has(cId) ? cId : "germany";
+    const hash = `#${safePage}${safePage === "country" ? "/" + country : ""}`;
+    if (window.location.hash === hash) setRoute(readRoute());
+    else window.location.hash = hash;
+  }, []);
+
+  useEffect(() => {
+    const changed = () => setRoute(readRoute());
+    window.addEventListener("hashchange", changed);
+    return () => window.removeEventListener("hashchange", changed);
   }, []);
 
   useEffect(() => {
@@ -87,6 +104,11 @@ export default function App() {
         </motion.main>
       </AnimatePresence>
       <Footer go={go} />
+      {page !== "ailab" && (
+        <button onClick={() => go("ailab")} aria-label="باز کردن دستیار آموزشی" className="fixed bottom-6 right-5 z-40 flex items-center gap-2 rounded-full bg-pine px-4 py-3.5 text-xs font-black text-white shadow-xl ring-1 ring-white/20 transition-colors hover:bg-teal-800">
+          <Bot className="h-5 w-5" /><span className="hidden sm:inline">پرسش از دستیار</span>
+        </button>
+      )}
 
       <AnimatePresence>
         {showTop && (
